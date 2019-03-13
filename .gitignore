@@ -1,0 +1,5 @@
+conf/config.yaml
+conf/tasks.d/*.yaml
+*.so
+*.exe
+ican
