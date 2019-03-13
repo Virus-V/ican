@@ -115,11 +115,23 @@ func (a *ican) checkTaskPeriod(task *userTask) bool {
 		panic(err)
 	}
 
-	// 如果下次发送时间小于等于当前时间,则发送邮件更新时间
-	dur, err := time.ParseDuration(task.Period)
-	if err != nil {
-		panic(err)
+	var dur time.Duration
+	// 计算时间间隔
+	if strings.ToUpper(task.Period) == "AUTO" {
+		timeSpan := task.DeadlineT.Sub(task.CreateT)
+		if int(timeSpan.Hours()) < 8760 { // 任务跨度小时数小于1年
+			dur, _ = time.ParseDuration("360h") // 15天
+		} else {
+			dur, _ = time.ParseDuration("720h") // 30天
+		}
+	} else {
+		// 解析用户指定的时间跨度
+		dur, err = time.ParseDuration(task.Period)
+		if err != nil {
+			panic(err)
+		}
 	}
+
 	// 下次发送时间
 	nextSend := prev.Add(dur)
 	// 是否到达截止日期
