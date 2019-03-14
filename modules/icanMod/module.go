@@ -60,6 +60,11 @@ func (t *icanModule) Stop(s core.Service) {
 	log.Print("Ican! module stoped!")
 }
 
+// String ...
+func (t *icanModule) String() string {
+	return "ICan Module"
+}
+
 func main() {
 	log.Fatal("This is a vgof module, please build this package with \"-buildmode=plugin\".")
 }

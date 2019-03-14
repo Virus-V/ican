@@ -57,6 +57,11 @@ func (t *sendmailMod) Stop(s core.Service) {
 	log.Print("Sendmail module stoped!")
 }
 
+// String ...
+func (t *sendmailMod) String() string {
+	return "Send mail Module"
+}
+
 func main() {
 	log.Fatal("This is a vgof module, please build this package with \"-buildmode=plugin\".")
 }

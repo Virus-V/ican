@@ -51,6 +51,11 @@ func (t *configModule) Stop(s core.Service) {
 	log.Print("Config module stoped!")
 }
 
+// String ...
+func (t *configModule) String() string {
+	return "Config Module"
+}
+
 func main() {
 	log.Fatal("This is a vgof module, please build this package with \"-buildmode=plugin\".")
 }

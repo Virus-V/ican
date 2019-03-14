@@ -67,7 +67,6 @@ func (a *ican) Main(s core.Service) {
 	for {
 		select {
 		case <-ticker.C:
-			a.logger.Info("Checking tasks...")
 			taskFiles := a.getTaskFiles()
 			for _, v := range taskFiles {
 				task := a.getUserTask(v)
@@ -84,7 +83,6 @@ func (a *ican) Main(s core.Service) {
 					a.updateUserTask(v, task)
 				}
 			}
-			a.logger.Info("Checking complete")
 		case <-sigs:
 			a.logger.Info("Receive exit signal")
 			return
